@@ -21,3 +21,18 @@ Meteor.subscribe("posts");
 
 
 Meteor.subscribe("accounts");
+
+Template.home.posts = function(){
+	return Posts.find();
+}
+
+Template.upload.events({
+  'change .myFileInput': function(event, template) {
+    FS.Utility.eachFile(event, function(file) {
+      Files.insert(file, function (err, fileObj) {
+        //Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+      });
+    });
+  }
+});
+
