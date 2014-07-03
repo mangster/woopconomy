@@ -84,10 +84,54 @@
 <template name="upload">
 	<h2>Upload</h2>
 	<p>You are on the upload screen.</p>
-	
-	<form name="uploadForm">
-			<input id="fileInput" type="file" multiple="multiple"> 
-	</form>
 
+	<form id="upload" action="/upload" method="POST" enctype="multipart/form-data"> 
+		<fieldset> 
+			<input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" /> 
+			<div> 
+				<label for="fileselect">Files to upload:</label> 
+				<input type="file" id="fileselect" name="fileselect[]" multiple="multiple" /> 
+				<div id="filedrag">or drop files here
+				</div> 
+			</div>
+			<div id="submitbutton"> 
+				<button type="submit">Upload Files</button> 
+			</div> 
+		</fieldset> 
+	</form>
+	<p>asfasf</p>
+
+	{{> uploadResult}}
+
+</template>
+
+<template name="uploadResult">
+		<div class="container">
+		<div class="row">
+			<div class ="page-header">
+				<h1>Imported <small>Data</small></h1>
+			</div>
+			<div class="span12">
+				<table class="table table-striped table-condensed table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Description</th>
+							<th>Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each rows}}
+						<tr>
+							<td>{{date}}</td>
+							<td>{{description}}</td>
+							<td>{{amount}}</td>
+						</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </template>
 
