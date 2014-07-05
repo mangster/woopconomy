@@ -19,8 +19,9 @@ Template.navItems.helpers({
 
 Meteor.subscribe("posts");
 
-
 Meteor.subscribe("accounts");
+
+Meteor.subscribe("imports");
 
 Template.home.posts = function(){
 	console.log(Posts.find());
@@ -30,27 +31,30 @@ Template.home.posts = function(){
 
 
 function loadHandler(event) {
-var csv = event.target.result;
-processData(csv);
+	var csv = event.target.result;
+	processData(csv);
 }
-lines = new Meteor.Collection;
+//lines = new Meteor.Collection;
 function processData(csv) {
 	var allTextLines = csv.split(/\r\n|\n/);
 	//var lines = [];
 	
 	for (var i=0; i<allTextLines.length; i++) {
 		var data = allTextLines[i].split(';');
-			var tarr = [];
-			var tarr2 = {};
+		var row = [];
+		var fixedRow = {};
+		if (new Date(data[0]) != "Invalid Date"){
 			for (var j=0; j<data.length; j++) {
-				tarr.push(data[j]);
+				row.push(data[j]);
 			}
-			tarr2.date = tarr[0];
-			tarr2.description = tarr[1];
-			tarr2.amount = tarr[2];
-			lines.insert(tarr2);
+			fixedRow.dateObject = new Date(row[0]);
+			//fixedRow.date = fixedRow.dateObject.toDateString();
+			fixedRow.date = row[0];
+			fixedRow.description = row[1];
+			fixedRow.amount = parseFloat(row[2]);
+			Imports.insert(fixedRow);
+		}
 	}
-	console.log(lines);
 }
 
 function errorHandler(evt) {
@@ -68,15 +72,21 @@ function getAsText(fileToRead) {
 	reader.onerror = errorHandler;
 }
 
-Template.upload.events({ 'change #fileselect': function ( event, template ) { 
+Template.upload.events({ 
+	'click #clearImports' : function(e, t) {
+		e.preventDefault();
+		//TODO change to remove imports for this user only
+		Meteor.call("removeAllImports");
+		return false;
+    },
+	'change #fileselect': function ( event, template ) { 
 	// fetch FileList object 
-	var files = event.target.files || event.dataTransfer.files; 
-	
-	getAsText(files[0]);
+		var files = event.target.files || event.dataTransfer.files; 
+		getAsText(files[0]);
 	}, 
 });
 
 Template.uploadResult.rows = function(){
 	
-	return lines.find();
+	return Imports.find();
 }

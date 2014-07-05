@@ -91,19 +91,23 @@
 			<div> 
 				<label for="fileselect">Files to upload:</label> 
 				<input type="file" id="fileselect" name="fileselect[]" multiple="multiple" /> 
-				<div id="filedrag">or drop files here
-				</div> 
 			</div>
 			<div id="submitbutton"> 
 				<button type="submit">Upload Files</button> 
 			</div> 
 		</fieldset> 
 	</form>
-	<p>asfasf</p>
 
+	<div class="panel panel-primary" id="clearImports">
+		<div class="panel-body">
+			<button type="submit" class="btn btn-danger deleteItem" href="#">Clear Imports</button>
+		</div>
+	</div>
 	{{> uploadResult}}
 
 </template>
+
+
 
 <template name="uploadResult">
 		<div class="container">
