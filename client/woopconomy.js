@@ -6,7 +6,7 @@ Router.map(function () {
 	this.route('home', {
 		path: '/',  //overrides the default '/home'
 	  });
-	this.route('upload');
+	this.route('import');
 });
 
 Template.navItems.helpers({
@@ -72,7 +72,7 @@ function getAsText(fileToRead) {
 	reader.onerror = errorHandler;
 }
 
-Template.upload.events({ 
+Template.import.events({ 
 	'click #clearImports' : function(e, t) {
 		e.preventDefault();
 		//TODO change to remove imports for this user only

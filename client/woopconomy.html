@@ -43,8 +43,8 @@
 	<li class="{{ activeIfTemplateIs 'home' }}">
 		<a href="{{pathFor 'home'}}">Home</a>
 	</li>
-	<li class="{{ activeIfTemplateIs 'upload' }}">
-		<a href="{{pathFor 'upload'}}">Upload</a>
+	<li class="{{ activeIfTemplateIs 'import' }}">
+		<a href="{{pathFor 'import'}}">Import</a>
 	</li>
 </template>
 
@@ -81,30 +81,17 @@
 	</div>
 </template>
 
-<template name="upload">
-	<h2>Upload</h2>
-	<p>You are on the upload screen.</p>
-
-	<form id="upload" action="/upload" method="POST" enctype="multipart/form-data"> 
-		<fieldset> 
-			<input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" /> 
-			<div> 
-				<label for="fileselect">Files to upload:</label> 
-				<input type="file" id="fileselect" name="fileselect[]" multiple="multiple" /> 
-			</div>
-			<div id="submitbutton"> 
-				<button type="submit">Upload Files</button> 
-			</div> 
-		</fieldset> 
-	</form>
-
-	<div class="panel panel-primary" id="clearImports">
-		<div class="panel-body">
-			<button type="submit" class="btn btn-danger deleteItem" href="#">Clear Imports</button>
-		</div>
-	</div>
+<template name="import">
+	<h2>Import</h2>
+	<p>You are on the import screen.</p>
+	<p>  
+		<span class="btn btn-default btn-file">
+		Upload file <input type="file" id="fileselect" name="fileselect[]" >
+		</span>
+		<button id="clearImports" type="submit" class="btn btn-danger" href="#">Clear Imports</button>
+		<button type="button" class="btn btn-primary">Save to account</button>
+	</p>
 	{{> uploadResult}}
-
 </template>
 
 
