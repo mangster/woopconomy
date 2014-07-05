@@ -6,3 +6,6 @@ Imports = new Meteor.Collection("imports");
 
 // Account model
 Accounts = new Meteor.Collection("accounts");
+
+// Category model
+Categories = new Meteor.Collection("categories");
