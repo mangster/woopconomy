@@ -1,6 +1,3 @@
-
-
-
 function loadHandler(event) {
 	var csv = event.target.result;
 	processData(csv);
@@ -27,7 +24,7 @@ function processData(csv) {
 
 function errorHandler(evt) {
 	if(evt.target.error.name == "NotReadableError") {
-		alert("Canno't read file !");
+		alert("Can't read file");
 	}
 }
 
@@ -54,7 +51,7 @@ Template.import.events({
 	}, 
 });
 
-Template.uploadResult.rows = function(){
+Template.import.rows = function(){
 	
 	return Imports.find();
 }
