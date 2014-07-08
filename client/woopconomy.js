@@ -10,6 +10,7 @@ Router.map(function () {
 	  });
 	this.route('import');
 	this.route('categories');
+	this.route('accounts');
 });
 
 
