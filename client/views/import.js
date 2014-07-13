@@ -55,3 +55,7 @@ Template.import.rows = function(){
 	
 	return Imports.find();
 }
+
+Template.import.accounts = function () {
+  return Accounts.find({}, { sort: { name: 1 }});
+}
