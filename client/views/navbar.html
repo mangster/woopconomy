@@ -1,7 +1,7 @@
 <template name="navbar">
-	<div class="container nav-container">
-		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-			<div class="container nav-container">
+	<div class="container">
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 						<span class="sr-only">Toggle navigation</span>
@@ -32,9 +32,6 @@
 	</li>
 	<li class="{{ activeIfTemplateIs 'categories' }}">
 		<a href="{{pathFor 'categories'}}">Categories</a>
-	</li>
-	<li class="{{ activeIfTemplateIs 'accounts' }}">
-		<a href="{{pathFor 'accounts'}}">Accounts</a>
 	</li>
 	<li class="{{ activeIfTemplateIs 'import' }}">
 		<a href="{{pathFor 'import'}}">Import</a>
