@@ -44,6 +44,18 @@ Template.import.events({
 		Meteor.call("removeAllImports");
 		return false;
     },
+	'click #saveToAccount' : function(e, t) {
+		e.preventDefault();
+		var selected = document.getElementById("account");
+		var accountId = selected.options[selected.selectedIndex].id;
+		//var account = Accounts.find({id: accountId});
+		//var account = Accounts.findOne();
+		var currentImports = Imports.find();
+		currentImports.forEach(function (post){
+			Posts.insert({account: accountId, date: post.date, description: post.description, amount: post.amount});
+		});
+		return false;
+    },
 	'change #fileselect': function ( event, template ) { 
 	// fetch FileList object 
 		var files = event.target.files || event.dataTransfer.files; 
@@ -59,3 +71,4 @@ Template.import.rows = function(){
 Template.import.accounts = function () {
   return Accounts.find({}, { sort: { name: 1 }});
 }
+

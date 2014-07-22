@@ -8,6 +8,11 @@ if (Meteor.isServer) {
 
         return Imports.remove({});
 
+      },
+	  removeAllPosts: function() {
+
+        return Posts.remove({});
+
       }
 
     });
