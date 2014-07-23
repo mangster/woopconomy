@@ -9,3 +9,4 @@ Accounts = new Meteor.Collection("accounts");
 
 // Category model
 Categories = new Meteor.Collection("categories");
+Subcategories = new Meteor.Collection("subcategories");

@@ -6,10 +6,27 @@
 					<h1>Categories</h1>
 				</div>	
 				<h4>Create new category</h4>
-				<form class="form-inline">
+				<form class="form-inline" id="createCategory">
 					<div class="form-group">
 						<label class="sr-only" for="categoryName">Category Name</label>
 						<input type="text" class="form-control" id="categoryName" placeholder="Category name">
+					</div>
+					<button type="submit" class="btn btn-primary">Create</button>
+				</form>
+				<h4>Create new Sub-category</h4>
+				<form class="form-inline" id="createSubcategory">
+					<div class="form-group">
+						<label class="sr-only" for="category">Category</label>
+						<select id="parentCategory" class="form-control">
+							<option value="" disabled selected>Select category</option>>
+							{{#each categories}}
+								<option id={{_id}}>{{name}}</option>
+							{{/each}}
+						</select>
+				  </div>
+					<div class="form-group">
+						<label class="sr-only" for="subcategoryName">Sub-Category Name</label>
+						<input type="text" class="form-control" id="subcategoryName" placeholder="Sub-Category name">
 					</div>
 					<button type="submit" class="btn btn-primary">Create</button>
 				</form>
@@ -21,19 +38,27 @@
 				<table class="table table-striped table-condensed table-hover table-bordered">
 					<thead>
 						<tr>
-							<th>Date</th>
-							<th>Description</th>
-							<th>Amount</th>
+							<th>Category</th>
+							<th>Subcategory</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
 						{{#each categories}}
-						<tr>
-							<td>{{date}}</td>
-							<td>{{description}}</td>
-							<td>{{amount}}</td>
-						</tr>
+							<tr>
+								<td>{{name}}</td>
+								<td></td>
+								<td><button type="submit" class="btn btn-danger deleteCategory" href="#">Delete</button></td>
+							</tr>
+							{{#each subcategories}}
+								<tr>
+									<td></td>
+									<td>{{name}}</td>
+									<td><button type="submit" class="btn btn-danger deleteSubcategory" href="#">Delete</button></td>
+								</tr>
+							{{/each}}
 						{{/each}}
+						
 					</tbody>
 				</table>
 			</div>
