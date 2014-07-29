@@ -11,18 +11,13 @@ Router.map(function () {
 	this.route('import');
 	this.route('categories');
 	this.route('accounts');
+	this.route('categorize');
 });
 
 
 
 Template.home.posts = function(){
 	return Posts.find();
-}
-
-Template.home.account = function(){
-	console.log(Accounts.find({id: this.account}));
-	
-	return true;
 }
 
 Template.home.events({ 
@@ -46,4 +41,30 @@ Template.home.posts = function(){
         return doc;
         }
     });
+}
+
+Template.home.categories = function () {
+  return Categories.find({}, { sort: { name: 1 }});
+}
+
+Template.home.subcategories = function () {
+	return Subcategories.find({parent: this._id}, { sort: { name: 1 }});
+}
+
+Template.home.amount = function () {
+	var posts = Posts.find({subcategory: this._id});
+	var amount = 0;
+	posts.forEach(function (post){
+		amount += post.amount;
+	});
+	return amount;
+}
+
+Template.home.amountUncategorized = function () {
+	var posts = Posts.find({subcategory: ""});
+	var amount = 0;
+	posts.forEach(function (post){
+		amount += post.amount;
+	});
+	return amount;
 }

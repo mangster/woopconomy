@@ -4,6 +4,7 @@ function loadHandler(event) {
 }
 
 function processData(csv) {
+	//console.log(csv);
 	var allTextLines = csv.split(/\r\n|\n/);
 	for (var i=0; i<allTextLines.length; i++) {
 		var data = allTextLines[i].split(';');
@@ -16,6 +17,7 @@ function processData(csv) {
 			fixedRow.dateObject = new Date(row[0]);
 			fixedRow.date = row[0];
 			fixedRow.description = row[1];
+			//console.log(fixedRow.description);
 			fixedRow.amount = parseFloat(row[2]);
 			Imports.insert(fixedRow);
 		}
@@ -31,7 +33,7 @@ function errorHandler(evt) {
 function getAsText(fileToRead) {
 	var reader = new FileReader();
 	// Read file into memory as UTF-8      
-	reader.readAsText(fileToRead);
+	reader.readAsText(fileToRead, 'ISO-8859-1');
 	// Handle errors load
 	reader.onload = loadHandler;
 	reader.onerror = errorHandler;
@@ -52,7 +54,7 @@ Template.import.events({
 		//var account = Accounts.findOne();
 		var currentImports = Imports.find();
 		currentImports.forEach(function (post){
-			Posts.insert({account: accountId, date: post.date, description: post.description, amount: post.amount});
+			Posts.insert({account: accountId, date: post.date, description: post.description, amount: post.amount, category:"", subcategory:""});
 		});
 		return false;
     },
