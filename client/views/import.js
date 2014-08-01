@@ -14,14 +14,20 @@ function processData(csv) {
 			for (var j=0; j<data.length; j++) {
 				row.push(data[j]);
 			}
-			fixedRow.dateObject = new Date(row[0]);
-			fixedRow.date = row[0];
+			fixedRow.date = new Date(row[0]);
+			//fixedRow.date = row[0];
 			fixedRow.description = row[1];
 			//console.log(fixedRow.description);
 			fixedRow.amount = parseFloat(row[2]);
 			Imports.insert(fixedRow);
 		}
 	}
+}
+Template.import.date = function () {
+	var day = ("0" + this.date.getDate()).slice(-2);
+	var month = ("0" + (this.date.getMonth() + 1)).slice(-2);
+	var year = this.date.getFullYear();
+	return year + "-" + month + "-" + day;
 }
 
 function errorHandler(evt) {
@@ -67,7 +73,7 @@ Template.import.events({
 
 Template.import.rows = function(){
 	
-	return Imports.find();
+	return Imports.find({}, { sort: { date: -1 }});
 }
 
 Template.import.accounts = function () {

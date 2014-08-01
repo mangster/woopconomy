@@ -21,28 +21,23 @@
 				<table class="table table-condensed table-hover">
 					<thead>
 						<tr>
-							<th colspan="2">Category</th>
-							<th>Amount</th>
+							<th>Category</th>
+							{{#each months}}
+							<th>{{year}} - {{month}}</th>
+							{{/each}}
 						</tr>
 					</thead>
 					<tbody>
-						{{#each categories}}
-							<tr>
-								<td><b>{{name}}</b></td>
-								<td></td>
-								<td></td>
-							</tr>
+
 							{{#each subcategories}}
 								<tr>
-									<td></td>
-									<td>{{name}}</td>
+									<td>{{parentCategory}} > {{name}}</td>
 									<td>{{amount}}</td>
 								</tr>
 							{{/each}}
-						{{/each}}
+
 						<tr>
-							<td><b>Uncategorized</b></td>
-							<td></td>
+							<td>Uncategorized</td>
 							<td>{{amountUncategorized}}</td>
 						</tr>
 					</tbody>

@@ -25,7 +25,7 @@ Template.categorize.events({
 
 
 Template.categorize.posts = function(){
-    return Posts.find({}, { sort: { date: -1 }}, {transform: function(doc) {
+    return Posts.find({}, { sort: { amount: 1 }}, {transform: function(doc) {
 		//var accountName = Accounts.findOne({_id: "XpnDLRE5a9ECYEYnJ"});
 		var account = Accounts.findOne({_id: doc.account});
 		if (account){
@@ -38,6 +38,12 @@ Template.categorize.posts = function(){
     } );
 }
 
+Template.categorize.date = function () {
+	var day = ("0" + this.date.getDate()).slice(-2);
+	var month = ("0" + (this.date.getMonth() + 1)).slice(-2);
+	var year = this.date.getFullYear();
+	return year + "-" + month + "-" + day;
+}
 
 Template.categorize.categories = function () {
   return Categories.find({}, { sort: { name: 1 }});
@@ -47,7 +53,7 @@ Template.categorize.categories = function () {
 Template.categorize.hasCategory = function () {
 	//console.log(this);
 	if (this.category){
-		console.log("has category");
+		//console.log("has category");
 		return true;
 	}
 	else {
@@ -59,7 +65,7 @@ Template.categorize.hasCategory = function () {
 Template.categorize.hasSubcategory = function () {
 	//console.log(this);
 	if (this.subcategory){
-		console.log("has subcategory");
+		//console.log("has subcategory");
 		return true;
 	}
 	else {
