@@ -68,11 +68,24 @@ Template.home.months = function(){
 	Months = new Meteor.Collection(null);
 	var foundMonths = getMonths();
 	if (foundMonths != null){
-	for (var i = 0; i  < foundMonths.length; i++){
-		Months.insert({month: foundMonths[i].month, year: foundMonths[i].year});
+		for (var i = 0; i  < foundMonths.length; i++){
+			var monthArray = new Array();
+			monthArray[0] = "January";
+			monthArray[1] = "February";
+			monthArray[2] = "March";
+			monthArray[3] = "April";
+			monthArray[4] = "May";
+			monthArray[5] = "June";
+			monthArray[6] = "July";
+			monthArray[7] = "August";
+			monthArray[8] = "September";
+			monthArray[9] = "October";
+			monthArray[10] = "November";
+			monthArray[11] = "December";
+			Months.insert({name: monthArray[foundMonths[i].month], month: foundMonths[i].month, year: foundMonths[i].year});
+		}
 	}
-	}
-	return Months.find();
+	return Months.find({}, { sort: { month: 1 }});
 }
 
 getMonths = function(){
@@ -122,6 +135,22 @@ Template.home.amount = function () {
 	});
 	return amount;
 }
+
+
+Template.home.monthAmount = function () {
+	console.log(this);
+}
+
+Handlebars.registerHelper('amountByMonth', function (categoryId, year, month) {
+	var posts = Posts.find({subcategory: categoryId});
+	var amount = 0;
+	posts.forEach(function (post){
+		if (post.date.getMonth() == month && post.date.getFullYear() == year){
+			amount += post.amount;
+		}
+	});
+	return Math.round(amount);
+});
 
 Template.home.amountUncategorized = function () {
 	var posts = Posts.find({subcategory: ""});
