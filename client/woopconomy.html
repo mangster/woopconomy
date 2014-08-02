@@ -13,6 +13,11 @@
 <template name="home">
 	<div class="container">
 		<div class="row">
+			<div class ="col-md-12">
+				{{>pieChart}}
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-12">
 				<div class="page-header">
 					<h1>Data table</h1>
@@ -49,5 +54,15 @@
 		</div>
 	</div>
 
+</template>
+
+<template name="pieChart">
+	<h4>Pie Chart</h4>
+    <svg id="pieChart" width="400" height="400">
+    </svg>
+    <input type="button" id="add" value="Add a Value" />
+    <input type="button" id="remove" value="Remove a Value" />
+    <input type="button" id="randomize" value="Randomize Values" />
+    <input type="button" id="toggleSort" value="Toggle Sorting" />
 </template>
 
